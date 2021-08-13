@@ -2,9 +2,8 @@
 
 This component was born from the need to be able to mount react components inside HTML views using Ruby on Rails, providing a simple way to render the react component on the view passing different parameters and recieving them on the component through `props`
 ## Usage
-#### Set the `id` that will be used to search the HTML tag, this is the place where the react component is going to be mounted.
-The `data-props` attribute allows you to send the parameters to the component.
-<br>
+
+Define an element to mount the component into in your server-side rendered html, specifying either an `#id` or a `.class`. You can use the `data-props` attribute to send props coming out directly of your server-side rendered html.
 
 ```erb
 <div
@@ -15,10 +14,13 @@ The `data-props` attribute allows you to send the parameters to the component.
 </div>
 ```
 
-mounting the react component on the view is simple as doing this on your `application.js` file:
+Then, in your `application.js` (in case you're using Rails), import the `mountComponent` function and call it with 2 arguments: the selector (defined above) and the React component that you want to place in the element defined.
+
 ```javascript
 import { mountComponent } from 'mount-react-component'
 import MyReactComponent from './components/MyReactComponent'
 
-mountComponent('my-react-component', MyReactComponent)
+mountComponent('#my-react-component', MyReactComponent)
 ```
+
+**Tip**: you probably want to use `#id` for rendering a component in a single element, and a `.class` for rendering a component in multiple elements, even probably with different props.

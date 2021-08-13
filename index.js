@@ -1,17 +1,19 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 
-export function mountComponent (id, Component) {
+export function mountComponent (selector, Component) {
   document.addEventListener('DOMContentLoaded', () => {
-    const div = document.getElementById(id)
-    if (div) {
-      const props = JSON.parse(div.getAttribute('data-props'))
+    const elements = document.querySelectorAll(selector)
+
+    elements.forEach(element => {
+      const props = JSON.parse(element.getAttribute('data-props'))
+
       ReactDOM.render(
         <Suspense fallback='loading...'>
           <Component {...props} />
         </Suspense>,
-        div
+        element
       )
-    }
+    })
   })
 }
