@@ -1,6 +1,6 @@
 # mount-react-components
 
-This library was born from the need to be able to mount react components inside server-side rendered HTML views using Ruby on Rails (although it should be able to be used in any other web-framework), providing a simple way to render a react component on the view passing different parameters and recieving them on the component through `props`.
+This library was born from the need to be able to mount react components inside server-side rendered HTML views using Ruby on Rails (although it should be able to be used in any other web-framework), providing a simple way to render a react component on the view passing different parameters and receiving them on the component through `props`.
 
 ## Usage
 
@@ -9,9 +9,8 @@ Define an element to mount the component into in your server-side rendered html,
 ```erb
 <div
   data-component="MyReactComponent"
-  data-props="<%={
-    employees: Employee.all
-}.to_json %>">
+  data-props="<%= {employees: Employee.all}.to_json %>"
+>
 </div>
 ```
 
@@ -28,6 +27,12 @@ const components = {
 }
 
 mountComponents(components)
+```
+
+In case you don't need to send any props to your component you can omit the `data-props` attribute, which is not required:
+
+```erb
+<div data-component="MyReactComponent"></div>
 ```
 
 **Tip**: For components that need [Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html) you should wrap your main component and then add the wrapper on the components list.
