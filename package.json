@@ -1,6 +1,6 @@
 {
   "name": "mount-react-components",
-  "version": "1.2.0",
+  "version": "18.2.0",
   "description": "a simple way to mount react components on html views",
   "main": "index.js",
   "author": "Lucas Belenda",
