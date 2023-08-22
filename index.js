@@ -1,7 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-export function pureMountComponents (components) {
+export function mountComponents (components) {
   const roots = document.querySelectorAll('[data-component]')
 
   Array.from(roots).forEach(root => {
@@ -9,12 +9,8 @@ export function pureMountComponents (components) {
     const props = JSON.parse(root.dataset.props || '{}')
     const Component = components[root.dataset.component]
 
-    container.render(<Component {...props} />)
-  })
-}
+    if (Component) throw new Error(`Missing component. Founded a root element with "data-component=${root.dataset.component}", but the component is missing from the list`)
 
-export function mountComponents (components) {
-  document.addEventListener('DOMContentLoaded', () => {
-    pureMountComponents(components)
+    container.render(<Component {...props} />)
   })
 }
