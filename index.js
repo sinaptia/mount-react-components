@@ -9,7 +9,7 @@ export function mountComponents (components) {
     const props = JSON.parse(root.dataset.props || '{}')
     const Component = components[root.dataset.component]
 
-    if (Component) throw new Error(`Missing component. Founded a root element with "data-component=${root.dataset.component}", but the component is missing from the list`)
+    if (!Component) throw new Error(`Missing component. Found a root element with "data-component=${root.dataset.component}", but the component is missing from the list`)
 
     container.render(<Component {...props} />)
   })
